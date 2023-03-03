@@ -15,15 +15,11 @@ class HomeScreenFunctions {
     for (Map<String, dynamic> activity in allActivities) {
       DateTime now = DateTime.now();
       DateTime date = DateTime.parse(activity["Date"]);
-      // print(now);
-      // print(date);
-      // print(now.isBefore(date));
       if (now.isBefore(date)) {
         liveActivities.add(activity);
       }
     }
 
-    print(liveActivities);
     return liveActivities;
   }
 

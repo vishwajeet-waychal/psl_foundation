@@ -107,13 +107,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             _loginKey.currentState?.save();
 
                             login(_loginKey.currentState?.fields["username"]?.value, _loginKey.currentState?.fields["password"]?.value).then((value) {
-                              print(value);
                               if (value == "User" || value == "Admin") {
-                                box.write('userType', value);
-                                box.write('empId', _loginKey.currentState?.fields["username"]?.value);
+
+                                Map<String, dynamic> data = {
+                                  'empId': _loginKey.currentState?.fields["username"]?.value,
+                                  'userType': value
+                                };
+                                box.write('userData', data);
+
                                 appMode = value;
                                 kEmpID = _loginKey.currentState?.fields["username"]?.value;
-                                Get.off(() => PFBottomNavigationBar());
+                                Get.off(() => const PFBottomNavigationBar());
                               } else if (value == "UserNotFound") {
                                 Fluttertoast.showToast(
                                     msg: "User not found",
