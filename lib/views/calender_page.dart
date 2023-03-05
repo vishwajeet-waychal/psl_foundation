@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:psl_foundation/constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psl_foundation/services/ActivityFunctions.dart';
@@ -33,6 +34,9 @@ class _CalenderPageState extends State<CalenderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+        ),
         title: Row(
           children: [
             Padding(

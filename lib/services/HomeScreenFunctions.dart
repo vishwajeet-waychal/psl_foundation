@@ -32,4 +32,14 @@ class HomeScreenFunctions {
     likes.add(int.parse(empId));
     await activityDocRef.update({"Like": likes});
   }
+
+  removeLike({required String empId, required String activityId}) async {
+    DocumentReference activityDocRef =
+    firestore.collection("activities").doc(activityId);
+    var activityDocSnapshot = await activityDocRef.get();
+    var activityData = activityDocSnapshot.data() as Map<String, dynamic>;
+    List likes = activityData["Like"];
+    likes.remove(int.parse(empId));
+    await activityDocRef.update({"Like": likes});
+  }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:psl_foundation/constant.dart';
+import 'package:psl_foundation/services/HomeScreenFunctions.dart';
 import 'package:psl_foundation/views/view_activity_page.dart';
 import 'package:psl_foundation/views/widgets/custom_raised_button.dart';
 
@@ -16,15 +17,20 @@ class PFHomeScreenCard extends StatelessWidget {
       required this.location,
       required this.subHeading,
       required this.imgUrl,
-      required this.activityData})
+      required this.activityData,
+      required this.activityId,
+        required this.like
+      })
       : super(key: key);
 
   final activityData;
+  final String activityId;
   final String title;
   final String subHeading;
   final String desc;
   final String location;
   final String date;
+  final List<dynamic> like;
   final int likeCount;
   final List imgUrl;
 
@@ -35,7 +41,7 @@ class PFHomeScreenCard extends StatelessWidget {
       child: Card(
         elevation: 4,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
         shadowColor: Colors.grey.shade50,
         child: Column(
           children: [
@@ -56,14 +62,13 @@ class PFHomeScreenCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         subHeading,
-                        style:
-                            TextStyle(fontSize: 10, color: Color(0xFF79757F)),
+                        style: const TextStyle(fontSize: 10, color: Color(0xFF79757F)),
                       )
                     ],
                   ),
@@ -72,13 +77,6 @@ class PFHomeScreenCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              // child: Container(
-              //   height: 150,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(10.0),
-              //     color: Colors.grey.shade100
-              //   ),
-              // ),
               child: CachedNetworkImage(
                 imageUrl: imgUrl[0],
                 height: 150,
@@ -98,7 +96,7 @@ class PFHomeScreenCard extends StatelessWidget {
                     child: Text(
                       desc,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                           fontSize: 12,
                           color: Color(0xFF79757F)),
@@ -116,19 +114,19 @@ class PFHomeScreenCard extends StatelessWidget {
                         color: Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(50.0)),
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     child: Row(
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.locationDot,
                           size: 14,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
                           location,
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                         )
                       ],
                     ),
@@ -139,7 +137,7 @@ class PFHomeScreenCard extends StatelessWidget {
                       color: Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(50.0)),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   child: Row(
                     children: [
                       const FaIcon(
@@ -151,7 +149,7 @@ class PFHomeScreenCard extends StatelessWidget {
                       ),
                       Text(
                         date,
-                        style: TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 12),
                       )
                     ],
                   ),
@@ -162,10 +160,17 @@ class PFHomeScreenCard extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    HomeScreenFunctions homeScreenFunctions = HomeScreenFunctions();
+                    if (!like.contains(int.parse(kEmpID))) {
+                      homeScreenFunctions.addLike(empId: kEmpID, activityId: activityId);
+                    } else {
+                      homeScreenFunctions.removeLike(empId: kEmpID, activityId: activityId);
+                    }
+                  },
                   icon: FaIcon(
                     FontAwesomeIcons.handsClapping,
-                    color: Colors.grey.shade400,
+                    color: like.contains(int.parse(kEmpID)) ? kColorPrimary : Colors.grey.shade400,
                   ),
                 ),
                 const SizedBox(
@@ -176,8 +181,8 @@ class PFHomeScreenCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    likeCount.toString() + "k",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    "${likeCount}k",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Spacer(),
@@ -189,8 +194,8 @@ class PFHomeScreenCard extends StatelessWidget {
                     title: "VIEW MORE",
                     onPressed: () {
                       Get.to(() => ViewActivityPage(
-                            activityData: activityData,
-                          ));
+                        activityData: activityData,
+                      ));
                     },
                   ),
                 )
