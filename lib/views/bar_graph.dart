@@ -30,7 +30,7 @@ class _BarChartSample7State extends State<BarChartSample7> {
 
   getGradeWiseEmpData() async {
   grdViseEmp = await overallAnalyticsFunctions.totalEmployeeCountGradeWise();
-  if (this.mounted) {
+  if (mounted) {
     setState(() {});
   }
   }
@@ -105,7 +105,6 @@ class _BarChartSample7State extends State<BarChartSample7> {
                     showTitles: true,
                     reservedSize: 36,
                     getTitlesWidget: (value, meta) {
-                      final index = value.toInt();
                       return Text(
                         value.toInt().toString(),
                       );

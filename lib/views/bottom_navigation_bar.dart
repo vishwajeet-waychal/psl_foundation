@@ -28,6 +28,7 @@ class _PFBottomNavigationBarState extends State<PFBottomNavigationBar> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) => {setState(() => _currentIndex = value)},
         currentIndex: _currentIndex,
+        iconSize: 20,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: FaIcon(FontAwesomeIcons.house), label: "Home"),

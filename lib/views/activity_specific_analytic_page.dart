@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psl_foundation/constant.dart';
 import 'package:psl_foundation/views/widgets/appbar.dart';
-import 'package:get/get.dart';
 
 import 'graph_screen.dart';
 
 class ActivitySpecificAnalyticPage extends StatelessWidget {
-  ActivitySpecificAnalyticPage({Key? key, required this.title}) : super(key: key);
+  const ActivitySpecificAnalyticPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -21,113 +20,104 @@ class ActivitySpecificAnalyticPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            GridView.count(
+              crossAxisCount: 3,
+              crossAxisSpacing: 14,
+              childAspectRatio: 0.7,
+              padding: const EdgeInsets.all(9.0),
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 140,
-                    width: Get.width * 0.28,
-                    decoration: BoxDecoration(
+                Container(
+                  decoration: BoxDecoration(
                       color: kColorPrimary,
                       borderRadius: BorderRadius.circular(8.0)
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '290',
-                          style: TextStyle(
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        '290',
+                        style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
                             color: Colors.white
-                          ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          'No. Of Participants',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'No. Of Participants',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                             color: Colors.white
-                          ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 140,
-                    width: Get.width * 0.28,
-                    decoration: BoxDecoration(
-                        color: kColorPrimary,
-                        borderRadius: BorderRadius.circular(8.0)
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '23',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                          ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: kColorPrimary,
+                      borderRadius: BorderRadius.circular(8.0)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        '23',
+                        style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
                         ),
-                        SizedBox(
-                          height: 5,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'One Time Participants',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white
                         ),
-                        Text(
-                          'One Time Participants',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 140,
-                    width: Get.width * 0.28,
-                    decoration: BoxDecoration(
-                        color: kColorPrimary,
-                        borderRadius: BorderRadius.circular(8.0)
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '60',
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                          ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: kColorPrimary,
+                      borderRadius: BorderRadius.circular(8.0)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        '60',
+                        style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
                         ),
-                        SizedBox(
-                          height: 5,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'CP BU Participation',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white
                         ),
-                        Text(
-                          'CP BU Participation',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 )
               ],
             ),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -139,9 +129,9 @@ class ActivitySpecificAnalyticPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Column(
-                    children: [
+                    children: const [
                       Padding(
-                        padding: const EdgeInsets.only(top: 8),
+                        padding: EdgeInsets.only(top: 8),
                         child: Text(
                             'Lives touched per activity',
                           style: TextStyle(

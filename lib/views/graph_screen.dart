@@ -55,7 +55,7 @@ class PieChart2State extends State {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 2, // previously aspectRatio: 1.3
       child: Row(
         children: <Widget>[
           const SizedBox(
@@ -97,7 +97,7 @@ class PieChart2State extends State {
               Indicator(
                 color: kColorPrimary,
                 text: 'Volunteering',
-                isSquare: true,
+                isSquare: false,
               ),
               SizedBox(
                 height: 4,
@@ -105,7 +105,7 @@ class PieChart2State extends State {
               Indicator(
                 color: kColorPrimary.withOpacity(0.5),
                 text: 'Donations',
-                isSquare: true,
+                isSquare: false,
               ),
             ],
           ),
@@ -189,7 +189,7 @@ class PieChart3State extends State {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 2, // previously aspectRatio: 1.3,
       child: Row(
         children: <Widget>[
           const SizedBox(
@@ -231,7 +231,7 @@ class PieChart3State extends State {
               Indicator(
                 color: kColorPrimary,
                 text: 'Activity 1',
-                isSquare: true,
+                isSquare: false,
               ),
               SizedBox(
                 height: 4,
@@ -239,7 +239,7 @@ class PieChart3State extends State {
               Indicator(
                 color: Color(0xFFA2D683),
                 text: 'Activity 2',
-                isSquare: true,
+                isSquare: false,
               ),
               SizedBox(
                 height: 4,
@@ -247,7 +247,7 @@ class PieChart3State extends State {
               Indicator(
                 color: Color(0xFFC8DF88),
                 text: 'Activity 3',
-                isSquare: true,
+                isSquare: false,
               ),
               SizedBox(
                 height: 4,
@@ -255,7 +255,7 @@ class PieChart3State extends State {
               Indicator(
                 color: Colors.green,
                 text: 'Activity 4',
-                isSquare: true,
+                isSquare: false,
               ),
             ],
           ),

@@ -25,6 +25,19 @@ class ViewActivityPage extends StatefulWidget {
 class _ViewActivityPageState extends State<ViewActivityPage> {
   bool? isHeartIconTapped = false;
   // bool activityType = widget.activityData[""]; //assign directly from database
+  late HomeScreenFunctions homeScreenFunctions;
+  late List<dynamic> like;
+
+  @override
+  void initState() {
+    super.initState();
+    like = widget.activityData['Like'];
+    homeScreenFunctions = HomeScreenFunctions();
+
+    if (like.contains(int.parse(kEmpID))) {
+      isHeartIconTapped = true;
+    }
+  }
 
   String isDonationActivity() {
     if (appMode == "Admin") {
@@ -60,7 +73,6 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
         title: "Activity",
         icon: Icons.local_activity,
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Stack(
           children: [
@@ -158,11 +170,11 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                           borderRadius: BorderRadius.circular(10),
                           onTap: () async {
                             onHeartIconTapped();
-                            HomeScreenFunctions temp =
-                                new HomeScreenFunctions();
-                            await temp.addLike(
-                                empId: kEmpID,
-                                activityId: widget.activityData["Activity_Id"]);
+                            if (isHeartIconTapped!) {
+                              homeScreenFunctions.addLike(empId: kEmpID, activityId: widget.activityData['Activity_Id']);
+                            } else {
+                              homeScreenFunctions.removeLike(empId: kEmpID, activityId: widget.activityData['Activity_Id']);
+                            }
                           },
                           child: Icon(
                             FontAwesomeIcons.handsClapping,
