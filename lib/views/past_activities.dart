@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:psl_foundation/services/ParticipatedActivitiesFunctions.dart';
 import 'package:psl_foundation/views/activity_specific_analytic_page.dart';
-import 'package:psl_foundation/views/registered_participants_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psl_foundation/views/widgets/appbar.dart';
 
@@ -10,7 +9,7 @@ import '../constant.dart';
 import '../services/HomeScreenFunctions.dart';
 
 class PastActivities extends StatefulWidget {
-  PastActivities({Key? key}) : super(key: key);
+  const PastActivities({Key? key}) : super(key: key);
 
   @override
   State<PastActivities> createState() => _PastActivitiesState();
@@ -20,9 +19,8 @@ class _PastActivitiesState extends State<PastActivities> {
   List list = [];
 
   Future getData() async {
-    HomeScreenFunctions homeScreenFunctions = HomeScreenFunctions();
-    list = await homeScreenFunctions.fetchLiveActivities();
-    print(list.length);
+    ParticipatedActivitiesFunctions participatedActivitiesFunctions = ParticipatedActivitiesFunctions();
+    list = await participatedActivitiesFunctions.getActivitiesParticipatedList(employeeId: kEmpID);
     return list;
   }
 
@@ -54,11 +52,13 @@ class _PastActivitiesState extends State<PastActivities> {
                 itemCount: activity_data.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.symmetric(horizontal: kVerticalSpace, vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: kVerticalSpace, vertical: 4),
                     child: InkWell(
                       onTap: () {
                         Get.to(ActivitySpecificAnalyticPage(title: activity_data[index]['Title']));
                       },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
@@ -77,35 +77,36 @@ class _PastActivitiesState extends State<PastActivities> {
                           ),
                           title: Text(
                             activity_data[index]['Title'],
-                            style: TextStyle(fontWeight: FontWeight.bold,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                                 fontSize: 14,
-
-                                ),
+                            ),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Activity Owner  :" + activity_data[index]['Activity_Owner'],
-                                style: TextStyle(fontSize: 12,
+                                'Activity Owner : ${activity_data[index]['Activity_Owner']}',
+                                style: const TextStyle(
+                                    fontSize: 12,
                                     color: Color(0xFF79757F)),
                               ),
                               Text(
-                                "Activity Date  :" + activity_data[index]['Date'],
-                                style: TextStyle(fontSize: 12,
+                                'Activity Date : ${activity_data[index]['Date']}',
+                                style: const TextStyle(
+                                    fontSize: 12,
                                     color: Color(0xFF79757F)),
                               ),
                               Text(
-                                "Lives Touched  :" + activity_data[index]['Lives_Touched'].toString(),
-                                style: TextStyle(fontSize: 12,
+                                'Lives Touched : ${activity_data[index]['Lives_Touched']}',
+                                style: const TextStyle(
+                                    fontSize: 12,
                                     color: Color(0xFF79757F)),
                               ),
 
                             ],
                           ),
                         ),
-
-                        //ListTile
                       ),
                     ),
                   );
