@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psl_foundation/views/widgets/appbar.dart';
 
 import '../constant.dart';
-import '../services/HomeScreenFunctions.dart';
 
 class PastActivities extends StatefulWidget {
   const PastActivities({Key? key}) : super(key: key);
@@ -25,12 +24,6 @@ class _PastActivitiesState extends State<PastActivities> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PFAppBar(
@@ -45,7 +38,7 @@ class _PastActivitiesState extends State<PastActivities> {
           } else if (snapshot.connectionState == ConnectionState.active ||
               snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return const Text('Error');
+              return const Center(child: Text('Error'));
             } else if (snapshot.hasData) {
               List activity_data = snapshot.data;
               return ListView.builder(
@@ -103,7 +96,6 @@ class _PastActivitiesState extends State<PastActivities> {
                                     fontSize: 12,
                                     color: Color(0xFF79757F)),
                               ),
-
                             ],
                           ),
                         ),
@@ -113,10 +105,10 @@ class _PastActivitiesState extends State<PastActivities> {
                 },
               );
             } else {
-              return const Text('No data');
+              return const Center(child: Text('No data'));
             }
           } else {
-            return Text('State: ${snapshot.connectionState}');
+            return Center(child: Text('State: ${snapshot.connectionState}'));
           }
         },
       ),

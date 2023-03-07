@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
               return const Center(child: Text('No data'));
             }
           } else {
-            return Text('State: ${snapshot.connectionState}');
+            return Center(child: Text('State: ${snapshot.connectionState}'));
           }
         },
       ),

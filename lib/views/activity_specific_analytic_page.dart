@@ -125,21 +125,36 @@ class ActivitySpecificAnalyticPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14.0)
                 ),
+                clipBehavior: Clip.hardEdge,
                 shadowColor: Colors.grey.shade50,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Column(
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(top: 8),
-                        child: Text(
-                            'Lives touched per activity',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: kColorPrimary,
+                        ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                'Lives touched per activity',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      PieChartSample3(),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 14, top: 8),
+                        child: PieChartSample3(),
+                      ),
                     ],
                   ),
                 ),

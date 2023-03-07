@@ -36,6 +36,7 @@ class _AnalyticsState extends State<Analytics> {
   getTop3VolActivity() async {
     top3VolActivity = Map<String, int>.fromEntries(await overallAnalyticsFunctions.getTop3VolunteeredActivities());
     setState(() {});
+    print(top3VolActivity);
   }
 
   getTop3DonatedActivity() async {

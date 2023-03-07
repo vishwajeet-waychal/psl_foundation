@@ -46,14 +46,12 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
       if (widget.activityData["Activity_Type"] == "Donation Drive") {
         return "Donate";
       } else {
-        print(widget.activityData["Task"][0]);
         return "Volunteer";
       }
     }
   }
 
   void storeData(String employeeId, var activity, int amountDonated) async {
-    print("Here in Function");
     EmployeeFunctions employeeFunctions = EmployeeFunctions();
     await employeeFunctions.registerDonation(employeeId: employeeId, activity: activity, amountDonated: amountDonated);
   }
@@ -69,7 +67,7 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PFAppBar(
+      appBar: const PFAppBar(
         title: "Activity",
         icon: Icons.local_activity,
       ),
@@ -77,85 +75,76 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
         child: Stack(
           children: [
             ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               children: [
-                SizedBox(
-                  height: 10,
-                ),
                 Row(
                   children: <Widget>[
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 28),
+                        padding: const EdgeInsets.all(8.0),
                         child: Hero(
                           tag: "Activity Title",
-                          child: Material(
-                            color: Colors.transparent,
-                            child: Text(widget.activityData["Title"],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 34,
-                                    fontWeight: FontWeight.bold)),
+                          child: Text(
+                              widget.activityData["Title"],
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              )
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
                 Padding(
-                  padding: EdgeInsets.only(left: 28),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.activityData["Activity_Type"],
                     style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16),
+                        color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
+                        fontWeight: FontWeight.w400
+                    ),
                   ),
                 ),
-                SizedBox(height: 25),
-                SizedBox(
-                  height: 279,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      SizedBox(width: 28),
-                      Container(
-                        height: 280,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/images/psl_activty_img.jpg"),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Container(
-                        height: 280,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          color: kColorPrimary,
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              "assets/images/psl_activty_img2.jpg",
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 180,
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Container(
+                          width: 280,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("assets/images/psl_activty_img.jpg"),
                             ),
                           ),
                         ),
-                      )
-                    ],
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 280,
+                          decoration: BoxDecoration(
+                            color: kColorPrimary,
+                            borderRadius: BorderRadius.circular(14.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                "assets/images/psl_activty_img2.jpg",
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(height: 32),
                 Padding(
-                  padding: EdgeInsets.only(left: 28),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
                       Container(
@@ -184,35 +173,31 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 42,
-                        width: 42,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.black, width: 1),
-                          color: Colors.white.withOpacity(0.1),
-                        ),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: () {
-                            // Call whatsapp chat link and route to join the group
-                            print(widget.activityData["Whatsapp_Chat_Link"]);
-                          },
-                          child: Icon(
-                            FontAwesomeIcons.whatsapp,
-                            color: Colors.green,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          height: 42,
+                          width: 42,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.black, width: 1),
+                            color: Colors.white.withOpacity(0.1),
+                          ),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onTap: () {
+                              // Call whatsapp chat link and route to join the group
+                              print(widget.activityData["Whatsapp_Chat_Link"]);
+                            },
+                            child: const Icon(
+                              FontAwesomeIcons.whatsapp,
+                              color: kColorPrimary,
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
                       Container(
                         height: 42,
-                        width: Get.width * 0.4,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black, width: 1),
                           borderRadius: BorderRadius.circular(10),
@@ -222,25 +207,24 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 8.0, right: 5),
                               child: Text(
-                                  widget.activityData["Lives_Touched"]
-                                      .toString(),
+                                  widget.activityData["Lives_Touched"].toString(),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                  )
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 8.0),
+                              child: Text(
+                                  "Lives Touched",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20)),
-                            ),
-                            SizedBox(
-                              width: Get.width * 0.03,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: Text("Lives Touched",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12)),
+                                  )
+                              ),
                             ),
                           ],
                         ),
@@ -283,29 +267,28 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
                 Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
+                            color: Colors.grey.shade200,
                             borderRadius: BorderRadius.circular(50.0)),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         child: Row(
                           children: [
-                            FaIcon(
+                            const FaIcon(
                               FontAwesomeIcons.locationDot,
                               size: 14,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               widget.activityData["Location"],
-                              style: TextStyle(fontSize: 12),
+                              style: const TextStyle(fontSize: 12),
                             )
                           ],
                         ),
@@ -313,8 +296,9 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(50.0)),
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(50.0)
+                      ),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       child: Row(
@@ -328,33 +312,26 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                           ),
                           Text(
                             widget.activityData["Date"].toString(),
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           )
                         ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.only(left: 28, right: 28),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "Activity Owner: ${widget.activityData["Activity_Owner"]}",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.only(left: 28, right: 28, bottom: 80),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.activityData["Description"],
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16),
+                    widget.activityData["Description"]
                   ),
                 )
               ],
@@ -376,95 +353,75 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                         ],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter)),
-                child: Center(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(16),
-                      onTap: () async {
-                        if (appMode == "Admin") {
-                          Get.to(() => RegisteredPage(
-                              widget.activityData["Activity_Id"]));
-                        } else {
-                          if (widget.activityData["Activity_Type"] ==
-                              "Donation Drive") {
-                            final task = await Get.bottomSheet(
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    bottom:
-                                    MediaQuery.of(context).viewInsets.bottom,
-                                    top: kDefaultSpace,
-                                    right: kDefaultSpace,
-                                    left: kDefaultSpace
-                                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: PFRaisedButton(
+                    title: isDonationActivity(),
+                    onPressed: () async {
+                      if (appMode == "Admin") {
+                        Get.to(() => RegisteredPage(
+                            widget.activityData["Activity_Id"]));
+                      } else {
+                        if (widget.activityData["Activity_Type"] ==
+                            "Donation Drive") {
+                          final task = await Get.bottomSheet(
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                  MediaQuery.of(context).viewInsets.bottom,
+                                  top: kDefaultSpace,
+                                  right: kDefaultSpace,
+                                  left: kDefaultSpace
+                              ),
 
-                                child: SingleChildScrollView(
-                                  child: FormBuilder(
-                                    key: _donationAmountKey,
-                                    child: Column(children: [
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 5),
-                                        child: FormBuilderTextField(
-                                          name: "Donation_Amount",
-                                          autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                          decoration: const InputDecoration(
-                                              labelText: "Add Donation Amount",
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.5,
-                                                      color: Colors.black26))),
-                                          validator:
-                                          FormBuilderValidators.compose([
-                                            FormBuilderValidators.required()
-                                          ]),
-                                        ),
+                              child: SingleChildScrollView(
+                                child: FormBuilder(
+                                  key: _donationAmountKey,
+                                  child: Column(children: [
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: FormBuilderTextField(
+                                        name: "Donation_Amount",
+                                        autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                        decoration: const InputDecoration(
+                                            labelText: "Add Donation Amount",
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.5,
+                                                    color: Colors.black26))),
+                                        validator:
+                                        FormBuilderValidators.compose([
+                                          FormBuilderValidators.required()
+                                        ]),
                                       ),
-                                      SizedBox(height: 20,),
-                                      PFRaisedButton(title: "Add Task",
-                                          onPressed: (){
-                                            _donationAmountKey.currentState?.saveAndValidate();
-                                            storeData(kEmpID, widget.activityData, int.parse(_donationAmountKey.currentState?.fields['Donation_Amount']?.value));
-                                            Get.back();
-                                          }),
-                                      SizedBox(height: 10,)
-                                    ]),),
-                                ),
+                                    ),
+                                    SizedBox(height: 20,),
+                                    PFRaisedButton(title: "Add Task",
+                                        onPressed: (){
+                                          _donationAmountKey.currentState?.saveAndValidate();
+                                          storeData(kEmpID, widget.activityData, int.parse(_donationAmountKey.currentState?.fields['Donation_Amount']?.value));
+                                          Get.back();
+                                        }),
+                                    SizedBox(height: 10,)
+                                  ]),),
                               ),
-                              backgroundColor: Colors.white,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    topLeft: Radius.circular(10)
-                                ),
+                            ),
+                            backgroundColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  topLeft: Radius.circular(10)
                               ),
+                            ),
 
-                            );
-                          } else {
-                            Get.to(() => RegisterForActivity(tasks: widget.activityData['Task'], activityData: widget.activityData,));
-                          }
+                          );
+                        } else {
+                          Get.to(() => RegisterForActivity(tasks: widget.activityData['Task'], activityData: widget.activityData,));
                         }
-                      },
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          color: kColorPrimary,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Container(
-                          height: 56,
-                          width: 319,
-                          child: Center(
-                              child: Text(
-                            isDonationActivity(),
-                            style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          )),
-                        ),
-                      ),
-                    ),
+                      }
+                    },
                   ),
                 ),
               ),
